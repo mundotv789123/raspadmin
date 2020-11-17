@@ -24,7 +24,7 @@ function json_response($data) {
 try {
     $pdo = new PDO("mysql:host={$db_host};dbname=$db_name", $db_username, $db_password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    /* descomentar essa linha se for a primeira vez a primeira execução */
+    /* descomentar essa linha se for a primeira execução */
     //$pdo->prepare("CREATE TABLE IF NOT EXISTS `links` (`id` INT AUTO_INCREMENT NOT NULL, `uuid` VARCHAR(32) UNIQUE NOT NULL, `url` TEXT NOT NULL, `sender_ip` VARCHAR(64), `created_at` DATETIME NOT NULL DEFAULT NOW(), PRIMARY KEY(`id`))")->execute();
 } catch (PDOException $ex) {
     json_response(['success' => false, 'message' => 'erro ao inicializar o banco de dados']);
