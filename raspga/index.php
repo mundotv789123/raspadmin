@@ -1,8 +1,8 @@
 <?php
 /*configurações*/
-$db_username = "rasp";
-$db_password = "80805040";
-$db_name = "rasp_ga";
+$db_username = "nome de suário";
+$db_password = "senha";
+$db_name = "banco de dados";
 $db_host = "localhost";
 $domains_blacklist = ["rasp.ga"]; //dominios que não podem ser encurtados
 
