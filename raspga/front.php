@@ -10,11 +10,11 @@
                 <h1>Encurtador de links</h1>
                 <div>
                     <label for="id">Nome da url</label><br>
-                    <input type="text" id="id" placeholder="Ex: google" class="form-input">
+                    <input type="text" id="id" placeholder="Ex: google" class="form-input"/>
                 </div>
                 <div>
                     <label for="url">Link a ser encurtado</label><br>
-                    <input type="text" id="url" placeholder="Ex: https://google.com" class="form-input">
+                    <input type="text" id="url" placeholder="Ex: https://google.com" class="form-input"/>
                 </div>
                 <button class="btn btn-green" onclick="shortLink()">Encurtar</button>
             </div>
