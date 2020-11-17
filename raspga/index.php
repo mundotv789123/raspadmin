@@ -1,4 +1,10 @@
 <?php
+/* 
+ * Encurtador de links simples para quem tá aprendendo php
+ * Esse codigo aborda algumas dicas de segurança, verificação de dados e outros
+ * Lembrer-se de descomentar a linha do banco de dados para criar a tabela
+ */
+
 /*configurações*/
 $db_username = "nome de suário";
 $db_password = "senha";
