@@ -11,7 +11,7 @@ link: https://rasp.ga
 - você precisa configurar o arquivo **index.php**
 - na primeira execução descomenta a linha que cria a tabela no banco de dados
 
-instalação no nginx
+**instalação no nginx**
 - abra o arquivo de configuração do seu site, geralmente fica em **/etc/nginx/sites-available** o arquivo padrão é o **default** ou o **default.conf**
 - vc precisa editar as seguintes linhas
 ```
@@ -37,7 +37,7 @@ location ~ \.php$ {
 - depois só instalar o **php7.2-fpm** (no ubuntu ou debian você pode instalado com o comando **apt install php7.2-fpm**)
 - após isso basta reiniciar o nginx com o comando **service nginx reload**
 
-instalação no apache2
+**instalação no apache2**
 - no apache não precisa fazer muita coisa só executar o comando **a2enmod rewrite**
 - todas as configurações no apache deve está no arquivo **.htaccess**
 
