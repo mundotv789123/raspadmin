@@ -11,14 +11,43 @@ $db_password = "senha";
 $db_name = "banco de dados";
 $db_host = "localhost";
 $domains_blacklist = ["rasp.ga"]; //dominios que não podem ser encurtados
+$names_blacklist = ["src"]; //nomes que não podem ser usados para encurtar links
 
 $path = trim(strip_tags(addslashes(substr(urldecode(strtok($_SERVER['REQUEST_URI'], '?')), 1))));
 
 /* carregar pagina inicial */
-if (empty($_POST) && $path == "") {
-    include './front.php';
+if (empty($_POST) && $path == ""): ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RaspGa encurtador de links</title>
+        <link rel="stylesheet" href="/src/css/estilo.css"/>
+    </head>
+    <body>
+        <div class="row-center">
+            <div class="form-center">
+                <h1>Encurtador de links</h1>
+                <div>
+                    <label for="id">Nome da url</label><br>
+                    <input type="text" id="id" placeholder="Ex: google" class="form-input">
+                </div>
+                <div>
+                    <label for="url">Link a ser encurtado</label><br>
+                    <input type="text" id="url" placeholder="Ex: https://google.com" class="form-input">
+                </div>
+                <button class="btn btn-green" onclick="shortLink()">Encurtar</button>
+            </div>
+            <div class='alert' style="opacity: 0">
+                <p class="alert-message"></p>
+            </div>
+        </div>
+    </body>
+    <script src="/src/js/jquery-3.5.1.min.js"></script>
+    <script src="/src/js/app.js"></script>
+</html>
+    <?php
     die();
-}
+endif;
 
 function json_response($data) {
     header("Content-Type: application/json");
@@ -30,7 +59,7 @@ function json_response($data) {
 try {
     $pdo = new PDO("mysql:host={$db_host};dbname=$db_name", $db_username, $db_password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    /* descomentar essa linha se for a primeira execução */
+    /* descomentar essa linha se for a primeira vez a primeira execução */
     //$pdo->prepare("CREATE TABLE IF NOT EXISTS `links` (`id` INT AUTO_INCREMENT NOT NULL, `uuid` VARCHAR(32) UNIQUE NOT NULL, `url` TEXT NOT NULL, `sender_ip` VARCHAR(64), `created_at` DATETIME NOT NULL DEFAULT NOW(), PRIMARY KEY(`id`))")->execute();
 } catch (PDOException $ex) {
     json_response(['success' => false, 'message' => 'erro ao inicializar o banco de dados']);
@@ -49,6 +78,9 @@ if (!empty($_POST)) {
     if (in_array(parse_url($url)['host'], $domains_blacklist)) {
         json_response(['success' => false, 'message' => 'esse link não pode ser encurtado']);
     }
+    if (in_array($uuid, $names_blacklist)) {
+        json_response(['success' => false, 'message' => 'esse nome não pode ser usado']);
+    }
     if (strlen($uuid) > 32) {
         json_response(['success' => false, 'message' => 'nome não pode ser maior que 32 caracteres']);
     }
@@ -61,7 +93,7 @@ if (!empty($_POST)) {
         }
         $ip = isset($_SERVER["HTTP_CF_CONNECTING_IP"]) ? $_SERVER["HTTP_CF_CONNECTING_IP"] : $_SERVER['REMOTE_ADDR'];
         $pdo->prepare("INSERT INTO `links` (`url`, `uuid`, `sender_ip`) VALUES (?, ?, ?)")->execute([$url, $uuid, $ip]);
-        json_response(["success" => true, "message" => "Url encurtada com sucesso para {$uuid}"]);
+        json_response(["success" => true, "message" => "url encurtada com sucesso para {$uuid}"]);
     } catch (PDOException $ex) {
         json_response(["success" => false, "message" => "erro interno no banco de dados"]);
     }
