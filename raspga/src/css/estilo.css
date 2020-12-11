@@ -1,51 +1,71 @@
 body {
-    background-color: cadetblue;
+    background-color:#1c1c1c;
 }
 .form-center {
-    background-color: gray;
-    padding: 20px;
-    text-align: center;
-    color: white;
-    border-radius: 15px 0;
+    background-color:gray;
+    padding:20px;
+    text-align:center;
+    color:#fff;
+    border-radius:20px 0;
+    margin: auto;
+    width: 500px;
+    font-family: Serif;
 }
 .form-input {
-    padding: 7px;
-    border-radius: 5px;
-    border: none;
+    padding:7px;
+    border-radius:5px;
+    border:none;
+    margin: 5px;
 }
 .btn {
-    margin: 10px;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
+    margin:10px;
+    border:none;
+    padding:10px;
+    border-radius:5px
 }
 .btn-green {
-    color: white;
-    background-color: #49ec49;
+    color:#fff;
+    background-color:#606060;
 }
 .btn-green:hover {
-    background-color: #49bb49;
+    background-color:#9f9f9f;
+}
+.btn-chocolate {
+    color:#fff;
+    background-color:#d2691e
+}
+.btn-chocolate:hover {
+    background-color:#a6551c
 }
 .row-center {
-    margin: 15% auto;
-    display: block;
-    width: 500px;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
 }
 .alert {
-    padding: 5px;
-    margin-top: 15px;
-    text-align: justify;
-    transition: 800ms;
-    color: white;
+    padding:5px;
+    margin-top:15px;
+    text-align:justify;
+    transition:800ms;
+    color:#fff;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    margin: 10px;
+    min-width: 250px;
+    font-family: Arial;
 }
 .alert-danger {
-    color: white;
-    background-color: indianred;
+    color: #fff;
+    background-color: #cd5c5c;
 }
 .alert-success {
-    color: white;
-    background-color: #54d554;
+    color: #fff;
+    background-color: #0ccc0c;
 }
 .alert-message {
-    margin: 0;
+    margin: 0
 }
