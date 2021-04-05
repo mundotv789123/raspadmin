@@ -1,4 +1,4 @@
-const api_url = 'https://arquivos.raspadmin.tk/api';
+const api_url = '/api';
 const path_icons = '/src/img/icons';
 
 function getFiles(path, func) {
