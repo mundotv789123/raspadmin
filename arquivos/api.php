@@ -4,7 +4,6 @@ function send_json($data, $code = 200) {
     header('HTTP/1.1 ' . $code);
     header("Content-Type: application/json");
     header("Accept: application/json");
-    header("Access-Control-Allow-Headers: api-token");
     header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
     header("Access-Control-Allow-Origin: *");
     echo json_encode($data);
