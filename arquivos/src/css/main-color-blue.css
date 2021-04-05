@@ -1,0 +1,26 @@
+a {
+    color: white;
+    text-decoration: none;
+}
+html, body {
+    background: rgb(0, 28, 45);
+    color: white;
+}
+header {
+    background: #083048;
+}
+main {
+    background: rgb(0, 20, 31);
+}
+aside {
+    background: rgb(0, 28, 45);
+}
+.file_list:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+.file_block:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.loading {
+    border-top-color: rgb(0, 173, 253);
+}

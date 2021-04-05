@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Raspadmin</title>
+        <meta name="viewport" content="initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/src/css/fontawesome-free-5.15.css">
+        <link rel="icon" type="image/png" href="/src/img/raspberry-pi-icon.png">
+        <link rel="stylesheet" type="text/css" href="/src/css/main-layout.css">
+        <link rel="stylesheet" type="text/css" href="/src/css/main-color-blue.css">
+        <link rel="stylesheet" type="text/css" href="/src/css/video_player.css">
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h2>RaspAdmin</h2>
+            </header>
+            <main>
+                <a href="/Arquivos" class="file_list">Arquivos</a>
+            </main>
+            <aside id="main_content">
+                <div class="loading" id="f_loading"></div>
+            </aside>
+        </div>
+        <script src="/src/js/jquery-3.5.1.min.js"></script>
+        <script src="/src/js/api.js"></script>
+        <script src="/src/js/video_player.js"></script>
+        <script>
+            /* componentes */
+            var files_block = document.getElementById('main_content');
+            var f_loading = document.getElementById('f_loading');
+            
+            /* funções da api */
+            getFiles(location.pathname, (data) => {
+                f_loading.remove();
+                if (data.success) {
+                    let files = Object.values(data.files);
+                    if (files.length === 0) {
+                        files_block.innerHTML += '<h1>Essa pasta está vazia</h1>';
+                        return;
+                    }
+                    files.map((file) => {
+                        let ext = getFileExt(file.name);
+                        let file_url;
+                        if (ext === 'mp4') {
+                            file_url = "onClick=\"playVideo('"+data.url+'/'+file.name+"')\"";
+                        } else {
+                            file_url = 'href="'+(file.is_dir ? data.path : data.url)+'/'+file.name+'"';
+                        }
+                        files_block.innerHTML += '<a '+file_url+' class="file_block">'+
+                        '<img src="'+getFileIcon(file.name, file.is_dir)+'"/> '+
+                        '<p>'+file.name+'</p>'+
+                        '</a>';
+                    });
+                } else {
+                    if (data.code === 404) {
+                        files_block.innerHTML += '<h1>Arquivo não encontrado</h1>';
+                    } else {
+                        files_block.innerHTML += '<h1>Erro interno, não foi possível acessar arquivos</h1>';
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
