@@ -23,11 +23,11 @@ function getFiles($path) {
     return $files;
 }
 
-/* Main path */
+/* Caminho principal */
 $main_path = "./files";
 $main_real_path = realpath($main_path);
 
-/* Path from url */
+/* Pegando caminho pela url */
 $path = substr(trim(urldecode(strtok($_SERVER['REQUEST_URI'], '?'))), 4);
 $real_path = realpath($main_path . $path);
 
