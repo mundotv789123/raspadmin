@@ -24,3 +24,6 @@ aside {
 .loading {
     border-top-color: rgb(0, 173, 253);
 }
+.visited {
+    color: #49ecfd;
+}
