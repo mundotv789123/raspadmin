@@ -10,6 +10,7 @@ function playVideo(url) {
     let video_element = document.createElement('video');
     video_element.src = url;
     video_element.oncanplay = setLoaded;
+    video_element.currentTime = getVideoTime(getFileName(url));
     video_element.controls = true;
     video_element.autoplay = true;
     
@@ -24,6 +25,7 @@ function playVideo(url) {
     let body_element = document.getElementsByTagName('body')[0];
     body_element.appendChild(video_player);
     
+    savingTimeLoop(video_element)
     setLoading();
 }
 
@@ -43,7 +45,10 @@ function setLoaded() {
     if (video_player) {
         let video = video_player.getElementsByTagName('video')[0];
         video.style = '';
-        document.getElementById('video_loading').remove();
+        let loading = (document.getElementById('video_loading'));
+        if (loading) {
+            loading.remove();
+        }
     }
 }
 
@@ -52,4 +57,31 @@ function closeVideo() {
     if (video_player) {
         video_player.remove();
     }
+}
+
+async function savingTimeLoop(video_element) {
+    await new Promise(r => setTimeout(r, 500));
+    if (!video_element.paused) {
+        if (video_element.currentTime != 0) {
+            let video_name = getFileName(video_element.src);
+            saveTime(video_name, video_element.currentTime)
+        }
+    }
+    savingTimeLoop(video_element);
+}
+
+function getFileName(url) {
+    let urlDecoded = decodeURI(url);
+    return urlDecoded.substring(urlDecoded.lastIndexOf('/') + 1);
+}
+
+function getVideoTime(video_name) {
+    let videos = (localStorage['videos'] ?  JSON.parse(localStorage['videos']) : {});
+    return (videos[video_name] ? videos[video_name] : 0);
+}
+
+function saveTime(video_name, video_time) {
+    let videos = (localStorage['videos'] ?  JSON.parse(localStorage['videos']) : {});
+    videos[video_name] = parseFloat(video_time.toFixed(2));
+    localStorage['videos'] = JSON.stringify(videos);
 }
