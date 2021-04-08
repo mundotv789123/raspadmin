@@ -16,8 +16,12 @@
                 <h2>RaspAdmin</h2>
             </header>
             <main>
-                <!-- Adicionar aqui listas das pastas fixadas do servidor -->
                 <a href="/Arquivos" class="file_list">Arquivos</a>
+                <a href="/Downloads" class="file_list">Downloads</a>
+                <a href="/Plugins" class="file_list">Plugins</a>
+                <a href="/Programas" class="file_list">Programas</a>
+                <a href="/Séries" class="file_list">Séries</a>
+                <a href="/Teste" class="file_list">Teste</a>
             </main>
             <aside id="main_content">
                 <div class="loading" id="f_loading"></div>
@@ -48,13 +52,13 @@
                         let ext = getFileExt(file.name);
                         let file_url;
                         if (ext === 'mp4') {
-                            file_url = "onClick=\"playVideo('"+data.url+'/'+file.name+"')\"";
+                            file_url = "onClick=\"playVideo('"+data.url+'/'+file.name+"'); this.getElementsByTagName('p')[0].className='visited'\"";
                         } else {
                             file_url = 'href="'+(file.is_dir ? data.path : data.url)+'/'+file.name+'"';
                         }
                         files_block.innerHTML += '<a '+file_url+' class="file_block">'+
                         '<img src="'+getFileIcon(file.name, file.is_dir)+'"/> '+
-                        '<p>'+file.name+'</p>'+
+                        '<p'+(getVideoTime(file.name) > 0 ? ' class="visited"' : '')+'>'+file.name+'</p>'+
                         '</a>';
                     });
                 } else {
