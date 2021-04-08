@@ -35,6 +35,10 @@
             getFiles(location.pathname, (data) => {
                 f_loading.remove();
                 if (data.success) {
+                    if (data.files === undefined) {
+                        location.pathname = data.url;
+                        return;
+                    }
                     let files = Object.values(data.files);
                     if (files.length === 0) {
                         files_block.innerHTML += '<h1>Essa pasta está vazia</h1>';
