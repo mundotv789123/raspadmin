@@ -58,11 +58,19 @@
                         '</a>';
                     });
                 } else {
-                    if (data.code === 404) {
-                        files_block.innerHTML += '<h1>Arquivo não encontrado</h1>';
-                    } else {
-                        files_block.innerHTML += '<h1>Erro interno, não foi possível acessar arquivos</h1>';
-                    }
+                    switch (data.code) {
+                		case 404:
+                			files_block.innerHTML += '<h1>Arquivo não encontrado</h1>';
+                			break;
+                		case 403:
+                			files_block.innerHTML += '<h1>Acesso negado</h1>';
+                			break;
+                		case 401:
+                			files_block.innerHTML += '<h1>Autenticação necessária</h1>';
+                			break;
+                		default:
+                			files_block.innerHTML += '<h1>Erro interno, não foi possível acessar arquivos</h1>';
+                	}
                 }
             });
         </script>
