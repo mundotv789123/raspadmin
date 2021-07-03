@@ -20,8 +20,8 @@ function playVideo(url) {
     video_close_btn.onclick = closeVideo;
     
     /* Adicionando video na tag body da página */
-    video_player.appendChild(video_close_btn);
     video_player.appendChild(video_element);
+    video_player.appendChild(video_close_btn);
     let body_element = document.getElementsByTagName('body')[0];
     body_element.appendChild(video_player);
     
